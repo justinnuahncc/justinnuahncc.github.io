@@ -20,8 +20,8 @@
       margin: 0;
       padding: 0;
       background: linear-gradient(180deg, #f7f8fa 0%, #eef1f5 100%);
-      line-height: 1.65;
       color: #1f2933;
+      line-height: 1.65;
     }
 
     .container {
@@ -46,24 +46,31 @@
       font-size: 32px;
       margin-bottom: 8px;
       letter-spacing: 0.3px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
     }
 
     .tagline {
       font-size: 18px;
       color: #475569;
-      margin-bottom: 12px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 1px rgba(0,0,0,0.05);
     }
 
     .contact {
       font-size: 15px;
       color: #334155;
       margin-bottom: 36px;
+      background: linear-gradient(90deg, #f0f4f8, #e2e8f0);
+      padding: 14px 18px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
     .contact a {
       color: #334155;
       text-decoration: none;
       border-bottom: 1px solid #cbd5e1;
+      margin-right: 12px;
     }
 
     .contact a:hover {
@@ -76,6 +83,26 @@
       margin-bottom: 14px;
       color: #1f2933;
       letter-spacing: 0.15px;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    h2::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(to bottom, #94a3b8, #cbd5e1);
+      border-radius: 3px;
+    }
+
+    /* Alternating background for sections */
+    h2 + p, h2 + ul {
+      background: rgba(228, 232, 240, 0.08);
+      padding: 10px 14px;
+      border-radius: 6px;
     }
 
     p {
@@ -89,54 +116,57 @@
 
     li {
       margin-bottom: 8px;
+      transition: all 0.25s ease;
     }
 
-    .sell-sheet {
-      margin-top: 48px;
-      font-size: 15px;
-    }
-
-    .sell-sheet a {
+    li:hover {
+      transform: translateX(4px);
       color: #1f2933;
-      text-decoration: none;
-      border-bottom: 1px solid #94a3b8;
-      padding-bottom: 2px;
     }
 
-    .sell-sheet a:hover {
-      border-bottom-color: #1f2933;
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
     }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
   </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Charleswood Consulting</h1>
-    <div class="tagline">Workforce Data &amp; HR Decision Support</div>
-    <div class="contact">
+    <h1 class="fade-in">Charleswood Consulting</h1>
+    <div class="tagline fade-in">Workforce Data &amp; HR Decision Support</div>
+    <div class="contact fade-in">
       Contact: 
       <a href="mailto:justin@charleswoodconsulting.com">justin@charleswoodconsulting.com</a> | 
       <a href="https://www.linkedin.com/in/justin-nuahn-9230b912" target="_blank">LinkedIn</a>
     </div>
 
-    <h2>What We Do</h2>
-    <p>
+    <h2 class="fade-in">What We Do</h2>
+    <p class="fade-in">
       Charleswood Consulting provides workforce data and HR decision support to small and mid-sized organizations.
       We help leadership teams better organize, interpret, and use their existing HR data to make clearer decisions
       around staffing, cost, utilization, and workforce risk.
     </p>
-    <p>
+    <p class="fade-in">
       Our work is project-based and executive-focused&mdash;designed to add senior-level HR perspective without adding
       headcount or changing systems.
     </p>
 
-    <h2>How We Help</h2>
-    <p>
+    <h2 class="fade-in">How We Help</h2>
+    <p class="fade-in">
       Organizations often have the data they need, but not the time or perspective to turn it into decision-ready
       insight. Charleswood Consulting bridges that gap by providing structured analysis and practical guidance
       leaders can act on.
     </p>
-    <ul>
+    <ul class="fade-in">
       <li>Workforce and headcount analysis</li>
       <li>Labor cost and utilization trends</li>
       <li>Turnover, retention, and workforce risk indicators</li>
@@ -144,33 +174,43 @@
       <li>HR data cleanup and decision-ready reporting</li>
     </ul>
 
-    <h2>Engagement Model</h2>
-    <ul>
+    <h2 class="fade-in">Engagement Model</h2>
+    <ul class="fade-in">
       <li>Project-based or limited ongoing support</li>
       <li>Works alongside internal HR, Finance, or Operations</li>
       <li>Complements (does not replace) HRIS or analytics vendors</li>
       <li>No system implementations or HR operations ownership</li>
     </ul>
 
-    <h2>Who It’s For</h2>
-    <ul>
+    <h2 class="fade-in">Who It’s For</h2>
+    <ul class="fade-in">
       <li>CEOs, CFOs, COOs, and senior leaders</li>
       <li>Organizations without in-house workforce analytics</li>
       <li>Teams seeking clarity before growth, restructuring, or cost decisions</li>
       <li>Leaders who value experienced HR judgment grounded in data</li>
     </ul>
 
-    <h2>About</h2>
-    <p>
+    <h2 class="fade-in">About</h2>
+    <p class="fade-in">
       Charleswood Consulting is led by Justin Nuahn, an experienced HR leader with 20+ years of experience supporting
       organizations through workforce planning, organizational change, and complex people decisions.
     </p>
-
-    <div class="sell-sheet">
-      <a href="Charleswood_Consulting_Sell_Sheet.pdf" target="_blank">
-        One-page overview (PDF)
-      </a>
-    </div>
   </div>
+
+  <!-- Scroll animation JS -->
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOnScroll = () => {
+      faders.forEach(fader => {
+        const top = fader.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        if(top < windowHeight - 50){
+          fader.classList.add('visible');
+        }
+      });
+    };
+    window.addEventListener('scroll', appearOnScroll);
+    window.addEventListener('load', appearOnScroll);
+  </script>
 </body>
 </html>
